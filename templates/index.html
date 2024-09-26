@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norms Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin-top: 3rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #343a40;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .btn-primary {
+            padding: 0.75rem;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .btn-primary {
+                font-size: 1rem;
+            }
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .output-quantity {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .output-table {
+            margin-bottom: 2rem;
+            border: 1px solid #343a40;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .output-table th,
+        .output-table td {
+            text-align: center;
+            padding: 8px;
+            border: 1px solid #343a40;
+        }
+
+        .output-table th {
+            background-color: #e9ecef;
+        }
+
+        .final-output-cell {
+            background-color: #d9edf7;
+            font-weight: bold;
+        }
+
+        .item-title {
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
+
+        .item-table {
+            margin-bottom: 2rem;
+            border: 1px solid #343a40;
+            border-collapse: collapse;
+        }
+
+        .item-table thead th {
+            background-color: #e9ecef;
+            text-align: left;
+        }
+
+        .item-table tbody td {
+            text-align: left;
+            border: 1px solid #343a40;
+        }
+
+        .highlight-row {
+            background-color: #ffc107;
+            font-weight: bold;
+        }
+
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px #0000001a;
+        }
+
+        .form-container .row {
+            margin-bottom: 1rem;
+        }
+
+        .bom-table {
+            background-color: #fff7e6;
+            border: 1px solid #343a40;
+        }
+
+        .bom-table th,
+        .bom-table td {
+            border: 1px solid #343a40;
+        }
+
+        .bom-header {
+            background-color: #ffa500;
+            color: #080808;
+            font-weight: bold;
+        }
+        table.table-bordered th,
+        table.table-bordered td {
+            border: 1px solid #343a40;
+            padding: 8px;
+        }
+        table.table-bordered th {
+            text-align: center; /* Center the table headers */
+        }
+        table.table-bordered {
+            border-collapse: collapse;
+        }  
+        /* Align numeric columns to the right */
+        table.table-bordered td:nth-child(2),
+        table.table-bordered td:nth-child(3),
+        table.table-bordered td:nth-child(4),
+        table.table-bordered td:nth-child(5),
+        table.table-bordered td:nth-child(6),
+        table.table-bordered td:nth-child(7) {
+            text-align: right;
+        }
+
+        /* Align the text column to the left */
+        table.table-bordered td:nth-child(1) {
+            text-align: left;
+        }
+        /* Align numeric columns to the right in bom-table */
+        table.bom-table td:nth-child(2),
+        table.bom-table td:nth-child(3),
+        table.bom-table td:nth-child(4) {
+            text-align: right;
+        }
+
+        /* Align the text column to the left in bom-table */
+        table.bom-table td:nth-child(1) {
+            text-align: left;
+        }
+        /* Align the text column to the left in item-table */
+        table.item-table th:nth-child(1),
+        table.item-table td:nth-child(1) {
+            text-align: left;
+        }
+
+        /* Align numeric columns to the right in item-table */
+        table.item-table th:nth-child(2),
+        table.item-table th:nth-child(3),
+        table.item-table th:nth-child(4),
+        table.item-table td:nth-child(2),
+        table.item-table td:nth-child(3),
+        table.item-table td:nth-child(4) {
+            text-align: right;
+        }
+
+        /* Ensure borders and padding are consistent */
+        table.item-table th,
+        table.item-table td {
+            border: 1px solid #343a40;
+            padding: 8px;
+        }
+        table.item-table td.highlight-net-qty {
+        background-color: #FFFF00;
+        font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Norms</h1>
+        <div class="form-container">
+            <form method="post">
+                <div class="d-flex justify-content-between align-items-end">
+                    <div class="d-flex flex-wrap">
+                        <div class="form-group me-3 mb-3">
+                            <label for="start_date" class="form-label">Start Date:</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control" value="2024-04-01" > <!--value="2023-04-01"-->
+                        </div>
+                        <div class="form-group me-3 mb-3">
+                            <label for="end_date" class="form-label">End Date:</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control" value="2024-08-31"> <!--value="2024-03-31"-->
+                        </div>
+                        <div class="form-group me-3 mb-3">
+                            <label for="fg_name" class="form-label">FG Name:</label>
+                            <select id="fg_name" name="fg_name" class="form-select">
+                                <option value="">Select FG Name</option>
+                                {% for name in fg_names %}
+                                <option value="{{ name }}" {% if request.form.fg_name == name %}selected{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary">Calculate</button>
+                        </div>
+                    </div>
+                    {% if output_quantity is not none %}
+                    <div class="card">
+                        <div class="card-body output-quantity">
+                            <p class="card-text">{{ batch_range }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-4">
+            {% if output_df %}
+            <table class="output-table">
+                <thead>
+                    <tr>
+                        <th>Output Quantity</th>
+                        <th>Same QTY</th>
+                        {% for key in output_df[0].keys() if key not in ['Output Quantity', 'Same QTY', 'Final Output QTY'] %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                        <th>Final Output QTY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ output_df[0]['Output Quantity'] }}</td>
+                        <td>{{ output_df[0]['Same QTY'] }}</td>
+                        {% for key in output_df[0].keys() if key not in ['Output Quantity', 'Same QTY', 'Final Output QTY'] %}
+                        <td>{{ output_df[0][key] }}</td>
+                        {% endfor %}
+                        <td class="final-output-cell">{{ output_df[0]['Final Output QTY'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+
+        <div class="mt-4">
+            {% for table in tables %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    {{ table|safe }}
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+                     
+        
+        {% if stock_summary %}
+            {% for item in stock_summary %}
+                <div class="item-title">{{ item['Item Name'] }}</div>
+                <table class="table table-striped item-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="values-title">Values</th>
+                            <th class="active-title">Active%</th>
+                            <th class="net-qty-title">TOTAL NET QTY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Opening</td>
+                            <td>{{ item.Opening }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>WIP PRODUCED</td>
+                            <td>{{ item['WIP PRODUCED'] }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>WIP CONSUMED IN PRODUCTION</td>
+                            <td>{{ item['WIP CONSUMED IN PRODUCTION'] }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Closing</td>
+                            <td>{{ item.Closing if item.Closing != 0 else '' }}</td>
+                            <td>{{ item.Closing_activation }}</td>
+                            <td>{{ item.Closing_mult if item.Closing_mult != 0 else '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Quantities Consumed from Opening Stock</td>
+                            <td>{{ item['Quantities Consumed from Opening Stock'] if item['Quantities Consumed from Opening Stock'] != 0 else '' }}</td>
+                            <td>{{ item['Quantities Consumed from Opening Stock_activation'] }}</td>
+                            <td>{{ item.Quantities_Consumed_mult if item.Quantities_Consumed_mult != 0 else '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>ADDITIONAL QTY CONSUMED IN OTHER WIP</td>
+                            <td>{{ item['ADDITIONAL QTY CONSUMED IN OTHER WIP'] if item['ADDITIONAL QTY CONSUMED IN OTHER WIP'] != 0 else '' }}</td>
+                            <td>{{ item['ADDITIONAL QTY CONSUMED IN OTHER WIP_activation'] }}</td>
+                            <td>{{ item.Additional_QTY_mult if item.Additional_QTY_mult != 0 else '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>NET QTY</td>
+                            <td></td>
+                            <td></td>
+                            <td class="{% if item['Item Name'] in highlighted_items %}highlight-net-qty{% endif %}">
+                                {{ item['NET QTY'] if item['NET QTY'] != 0 else '' }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                {% set has_bom_summaries = bom_summaries_df | selectattr('Stage Name', 'equalto', item['Item Name']) | list | length > 0 %}
+
+                {% if has_bom_summaries %}
+                    <div class="item-title" style="color: orange;">RM CONSUMPTION IN THE WIP</div>
+                    <table class="table table-striped item-table bom-table">
+                        <thead>
+                            <tr class="bom-header">
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>BOMQty</th>
+                                <th>RM WIP QTY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bom_item in bom_summaries_df if bom_item['Stage Name'] == item['Item Name'] %}
+                                <tr class="{% if bom_item.get('Highlight') %}highlight-row{% endif %}">
+                                    <td>{{ bom_item.Name }}</td>
+                                    <td>{{ bom_item.Quantity }}</td>
+                                    <td>{{ bom_item.BOMQty }}</td>
+                                    <td>{{ bom_item['RM WIP QTY'] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="loading-spinner">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("form").on("submit", function() {
+                $(".loading-spinner").show();
+            });
+        });
+    </script>
+</body>
+
+</html>
