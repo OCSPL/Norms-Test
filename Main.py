@@ -1,15 +1,19 @@
 from Utils.sql_queries import get_stock_query, get_job_work
 from Utils.utils import multiply_with_percentage
 from Products_Files.calculate_2_3_dichloro_pyridine import calculate_2_3_dichloro_pyridine
-from Products_Files.calculate_nndi_iso_propyl_ethyl_amine import calculate_nndi_iso_propyl_ethyl_amine
+from Products_Files.calculate_nndi_iso_propyl_ethyl_amine import calculate_nndi_iso_propyl_ethyl_amine,calculate_dpi
 from Products_Files.calculate_2_4_6_trimethyl_phenyl_acetyl_chlotide import calculate_2_4_6_trimethyl_phenyl_acetyl_chlotide, Calculate_246
 from Products_Files.calculate_2_5_dimethyl_phenyl_acetyl_chloride import calculate_2_5_dimethyl_phenyl_acetyl_chloride,Calculate_25
 from Products_Files.calculate_amido_chloride import calculate_amido_chloride
 from Products_Files.calculate_metcamifen import calculate_metcamifen
 from Products_Files.calculate_Spiro import calculate_Spiro
 from Products_Files.Calculate_24dcbc import Calculate_24dcbc
+from Products_Files.calculate_m2cp import calculate_m2cp
+from Products_Files.calculate_26DCBC import calculate_26DCBC
+from Products_Files.calculate_26DMBA import calculate_26DMBA
 from Utils.Bom import fetch_bom_details
 from Utils.FG_Names import fg_name_to_items
+from Utils.FG_Name_Stage import fg_name_stage_mapping
 import pandas as pd
 from sqlalchemy import text
 from Config import engine_norms, engine_eres
@@ -24,6 +28,7 @@ def process_data(start_date, end_date, fg_name):
     batch_range = None
     final_output_quantity = None
     highlighted_items = []
+   
 
     # Fetch data from Norms database
     query_bi_product = 'SELECT * FROM Bi_Production;'
@@ -123,12 +128,14 @@ def process_data(start_date, end_date, fg_name):
         lToDate = int(end_date.strftime('%Y%m%d'))
 
         # Filter data based on date range
-        filtered_out_product = df_out_product[(df_out_product['Output_Voucher_Date'] >= start_date) & (df_out_product['Output_Voucher_Date'] <= end_date)]
+        filtered_out_product = df_out_product[(df_out_product['Output_Voucher_Date'] >= start_date) & (df_out_product['Output_Voucher_Date'] <= end_date) & (df_out_product['FG_Name'] == fg_name)]
+        # filtered_out_product.to_csv('filtered_out_product.csv')
         filtered_bi_product = df_bi_product[(df_bi_product['BiProduct_Voucher_Date'] >= start_date) & (df_bi_product['BiProduct_Voucher_Date'] <= end_date)]
         filtered_consumption = merged_df2[(merged_df2['Consume_Voucher_Date'] >= start_date) & (merged_df2['Consume_Voucher_Date'] <= end_date) & (merged_df2['FG_Name'] == fg_name)]
+        # filtered_consumption.to_csv('filtered_consumption.csv')
         # job_work_df.to_csv('job_work_df.csv')
         job_work_df = job_work_df[(job_work_df['Consume_Voucher_Date'] >= start_date) & (job_work_df['Consume_Voucher_Date'] <= end_date) & (job_work_df['FG_Name'] == fg_name) & (job_work_df['Output_Quantity'] != 0)]
-        
+        # job_work_df.to_csv('job_work_df.csv')
         df_job_work2 = df_job_work2[(df_job_work2['Output_Voucher_Date'] >= start_date) & (df_job_work2['Output_Voucher_Date'] <= end_date) & (df_job_work2['FG_Name'] == fg_name) & (df_job_work2['Output_Quantity'] != 0)]    
 
         # Fetch stock data
@@ -247,6 +254,10 @@ def process_data(start_date, end_date, fg_name):
                 stock_summary, bom_summaries_df = calculate_metcamifen(stock_summary, bom_summaries_df)
             elif fg_name == '4-HYDROXY-3-(2,4,6-TRIMETHYLPHENYL)-1-OXASPIRO[4.4]NON-3-EN-2-ONE':
                 stock_summary, bom_summaries_df = calculate_Spiro(stock_summary, bom_summaries_df)
+            elif fg_name == 'METHYL-2-CHLORO PROPIONATE':
+                stock_summary, bom_summaries_df = calculate_m2cp(stock_summary, bom_summaries_df) 
+            elif fg_name == '2,6 DIMETHOXY BENZOIC ACID':
+                stock_summary, bom_summaries_df = calculate_26DMBA(stock_summary, bom_summaries_df)      
 
             # Group BOM summaries
             final_bom_summary = bom_summaries_df.groupby('Name').agg({'RM WIP QTY': 'sum'}).reset_index()
@@ -286,16 +297,24 @@ def process_data(start_date, end_date, fg_name):
             Con_qty['Rate'] = (Con_qty['Rate'] / Con_qty['Net_Qty']).round(2)
 
             # Calculate output quantity
+            # df_out_product.to_csv('output_quantity_df.csv')
             if fg_name:
                 output_quantity_df = df_out_product[(df_out_product['FG_Name'] == fg_name) &
                                                     (df_out_product['Output_Voucher_Date'] >= start_date) &
                                                     (df_out_product['Output_Voucher_Date'] <= end_date)]
+                # output_quantity_df.to_csv('output_quantity_df.csv')                                   
                 if fg_name == '2,3 DI CHLORO PYRIDINE':
                     output_quantity_df = output_quantity_df[output_quantity_df['Output_Item_Type'] == 'Finished Good']
                 else:
                     output_quantity_df = output_quantity_df[output_quantity_df['Output_Item_Type'] == 'Semi Finished Good']
+                
+                dcat_qty = pd.to_numeric(filtered_bi_product[filtered_bi_product['BiProduct_Item_Name'] == 'DCAT SFG']['BiProduct_Quantity'], errors='coerce').sum()
+                if fg_name == 'DICHLORO ACETIC ACID':
+                    output_quantity = output_quantity_df['Output_Quantity'].sum() + dcat_qty
+                else:
+                    output_quantity = output_quantity_df['Output_Quantity'].sum()
+                    # output_quantity_df.to_csv('output_quantity_df.csv')
 
-                output_quantity = output_quantity_df['Output_Quantity'].sum()
                 output_quantity_df['Batch_No'] = output_quantity_df['Output_Batch_No'].str[-3:].astype(int)
                 min_batch_no = output_quantity_df['Batch_No'].min()
                 max_batch_no = output_quantity_df['Batch_No'].max()
@@ -306,55 +325,8 @@ def process_data(start_date, end_date, fg_name):
                 MQTY = MQTY[MQTY['Same_QTY'] != 0]
                 same_qty = MQTY[MQTY['FG_Name_CON'] == fg_name]['Same_QTY'].sum()
 
-                # Final output quantity calculations
-                fg_name_stage_mapping = {
-                    '2,3 DI CHLORO PYRIDINE': {
-                        'items': [
-                            {'stage': 'Stage III', 'quantity_var': 'stage_3_net_qty'},
-                            {'stage': 'Stage IV', 'quantity_var': 'stage_4_net_qty'},
-                        ]
-                    },
-                    'N,N DI ISO PROPYL ETHYL AMINE': {
-                        'items': [
-                            {'item_name': 'DIPEA INTERCUT-1', 'stage': 'Stage I'},
-                            {'item_name': 'DIPEA RESIDUE', 'stage': 'Stage III'},
-                        ]
-                    },
-                    '2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE': {
-                        'items': [
-                            {'item_name': '2,4,6 TMPACL INTERCUT-1', 'stage': 'Stage VIII'},
-                            {'item_name': '2,4,6 TMPACL INTERCUT-2', 'stage': 'Stage IX'},
-                        ]
-                    },
-                    '2,5 DIMETHYL PHENYL ACETYL CHLORIDE': {
-                        'items': [
-                            {'item_name': '2,5 DMPACL (STAGE-IV) INTERCUT-1', 'stage': 'Stage XI'},
-                            {'item_name': '2,5 DMPACL (STAGE-IV) INTERCUT-2', 'stage': 'Stage XII'},
-                        ]
-                    },
-                    'AMIDO CHLORIDE': {
-                        'items': [
-                            {'item_name': 'AMIDO CHLORIDE OFF SPEC', 'stage': 'Stage VIII'},
-                        ]
-                    },
-                    'DMA-CHLORIDE LAN': {
-                        'items': [
-                            {'item_name': 'OCDB INTERCUT-01', 'stage': 'Stage I'},
-                        ]
-                    },
-                    '2,4 DICHLORO BENZOYL CHLORIDE': {
-                        'items': [
-                            {'item_name': '2,4 DCBC INTERCUT-1', 'stage': 'Stage III'},
-                            {'item_name': '2,4 DCBC INTERCUT-2', 'stage': 'Stage VI'},
-                        ]
-                    },
-                    'METHYL-2-CHLORO PROPIONATE': {
-                        'items': [
-                            {'item_name': 'M2CP INTERCUT-1', 'stage': 'Stage III'},
-                            {'item_name': 'M2CP INTERCUT-2', 'stage': 'Stage VI'},
-                        ]
-                    }
-                }
+              
+                
 
                 # Initialize final_output_quantity
                 final_output_quantity = output_quantity - same_qty
@@ -396,6 +368,8 @@ def process_data(start_date, end_date, fg_name):
                 output_df = pd.DataFrame(output_data)
 
             # Merge with BOM summary
+            if fg_name == '2,6 DICHLORO BENZOYL CHLORIDE':
+                Con_qty = calculate_26DCBC(Con_qty,job_work_df)
             if final_bom_summary is not None:
                 Con_qty
                 Con_qty = Con_qty.merge(final_bom_summary[['Name', 'RM WIP QTY']], left_on='Consume_Item_Name', right_on='Name', how='left')
@@ -415,11 +389,12 @@ def process_data(start_date, end_date, fg_name):
                 Con_qty = Calculate_25(Con_qty, stock_summary)
             elif fg_name == '2,4 DICHLORO BENZOYL CHLORIDE':
                 Con_qty = Calculate_24dcbc(Con_qty, job_work_df,stock_summary)
-            
+            elif fg_name == 'N,N DI ISO PROPYL ETHYL AMINE':
+                Con_qty = calculate_dpi(Con_qty,stock_summary)       
 
             # Calculate QTY and Norms
             Con_qty['QTY'] = Con_qty['Net_Qty'].astype(float) - Con_qty['WIP-RM'].astype(float)
-            exclude_items = ['2,3 DI CHLORO PYRIDINE', 'DICHLORO ACETYL CHLORIDE (M)', 'AMIDO CHLORIDE SFG', 'SPIR SFG','AMIDO CHLORIDE (M)']
+            exclude_items = ['2,3 DI CHLORO PYRIDINE', 'DICHLORO ACETYL CHLORIDE (M)', 'AMIDO CHLORIDE SFG', 'SPIR SFG','AMIDO CHLORIDE (M)','METHYL-2-CHLORO PROPIONATE (M)']
             Con_qty = Con_qty[~Con_qty['Consume_Item_Name'].isin(exclude_items)]
             Con_qty['Norms'] = (Con_qty['QTY'] / final_output_quantity)
             Con_qty['Value'] = (Con_qty['Norms'] * Con_qty['Rate']).round(2)

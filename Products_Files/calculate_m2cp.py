@@ -34,13 +34,10 @@ def update_bom_summaries_with_net_qty(stock_summary, bom_summaries_df, stage_nam
     
     return bom_summaries_df
 
-def calculate_2_5_dimethyl_phenyl_acetyl_chloride(stock_summary, bom_summaries_df):
-   
+def calculate_m2cp(stock_summary, bom_summaries_df):
+    # Define the stages and corresponding name filters to process
     stages = [
-        ('2,5 DMBCN STAGE-II', ['2,5 DMPAA (STAGE-III) DRY POWDER']),
-        ('2,5 DMBCN (STAGE-II) CRUDE', ['2,5 DMBCN STAGE-II']),
-        ('2,5 DMBCL STAGE-I', ['2,5 DMBCN (STAGE-II) CRUDE']),
-        ('2,5 DMBCL (STAGE-I) CRUDE', ['2,5 DMBCL STAGE-I']),
+        ('2-CHLORO PROPIONIC ACID-M2CP STAGE-I', ['M2CP CRUDE'])
     ]
     
     for stage_name, name_filters in stages:
@@ -51,45 +48,6 @@ def calculate_2_5_dimethyl_phenyl_acetyl_chloride(stock_summary, bom_summaries_d
             'RM WIP QTY'
         ].sum()
 
-        # Update ADDITIONAL QTY CONSUMED IN OTHER WIP
-        stock_summary.loc[
-            stock_summary['Item Name'] == stage_name, 
-            'ADDITIONAL QTY CONSUMED IN OTHER WIP'
-        ] = additional_qty_consumed
-
-        # Step 1 & 2: Sum the NET QTY of '2,5 DMPACL (STAGE-IV) INTERCUT-1' and '2,5 DMPACL (STAGE-IV) INTERCUT-2'
-        intercut_net_qty_sum = stock_summary.loc[
-            stock_summary['Item Name'].isin([
-                '2,5 DMPACL (STAGE-IV) INTERCUT-1',
-                '2,5 DMPACL (STAGE-IV) INTERCUT-2'
-            ]),
-            'NET QTY'
-        ].sum()
-
-        # Step 3: Update 'ADDITIONAL QTY CONSUMED IN OTHER WIP' for '2,5 DMPAC SFG'
-        stock_summary.loc[
-            stock_summary['Item Name'] == '2,5 DMPAC SFG',
-            'ADDITIONAL QTY CONSUMED IN OTHER WIP'
-        ] = intercut_net_qty_sum
-
-        # Handle special cases
-        if stage_name == '2,5 DMBCN STAGE-II':
-            # Existing logic for '2,5 DMBCN STAGE-II'
-            intercut_net_qty = stock_summary.loc[
-                stock_summary['Item Name'] == '2,5 DMBCN (STAGE II) INTERCUT',
-                'NET QTY'
-            ]
-            intercut_net_qty = intercut_net_qty.values[0] if not intercut_net_qty.empty else 0
-            additional_qty_consumed += intercut_net_qty
-
-        elif stage_name == '2,5 DMBCL STAGE-I':
-            # New logic for '2,5 DMBCL STAGE-I'
-            intercut_net_qty = stock_summary.loc[
-                stock_summary['Item Name'] == '2,5 DMBCL (STAGE-I) INTERCUT',
-                'NET QTY'
-            ]
-            intercut_net_qty = intercut_net_qty.values[0] if not intercut_net_qty.empty else 0
-            additional_qty_consumed += intercut_net_qty
 
         # Update ADDITIONAL QTY CONSUMED IN OTHER WIP
         stock_summary.loc[
@@ -121,18 +79,3 @@ def calculate_2_5_dimethyl_phenyl_acetyl_chloride(stock_summary, bom_summaries_d
         bom_summaries_df = update_bom_summaries_with_net_qty(stock_summary, bom_summaries_df, stage_name)
 
     return stock_summary, bom_summaries_df
-
-def Calculate_25(Con_qty,stock_summary):
-    # Filter the stock_summary DataFrame for '2,4,6 RECOVERED MESITYLENE'
-    mesitylene_row = stock_summary[stock_summary['Item Name'] == '2,5 DMBCL RECOVERED P- XYLENE']
-
-    # Extract the 'NET QTY' value and store it in a variable
-    mesitylene_net_qty = mesitylene_row['NET QTY'].values[0] if not mesitylene_row.empty else None
-
-    # Filter the Con_qty DataFrame for 'MESITYLENE (M)'
-    mesitylene_con_qty_row = Con_qty[Con_qty['Consume_Item_Name'] == 'PARA XYLENE (M)']
-
-    # Add the mesitylene_net_qty value to 'WIP-RM' in the filtered row
-    if not mesitylene_con_qty_row.empty:
-        Con_qty.loc[mesitylene_con_qty_row.index, 'WIP-RM'] += mesitylene_net_qty
-    return Con_qty

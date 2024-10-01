@@ -34,7 +34,10 @@ def fetch_bom_details(stage_name, stock_summary, engine_eres, fg_name):
         '2,4 DCBC CRUDE':['2,4 DCBC CRUDE-MAX'],
         '2-MBA WET CAKE':['2-MBA WET CAKE BR-102'],
         '2-CHLORO PROPIONIC ACID-M2CP STAGE-I':['26000123 - DRE-1302 - M2CP STAGE-I'],
-        'M2CP CRUDE':['26000119 - DRE-1302 - M2CP CRUDE']
+        'M2CP CRUDE':['26000119 - DRE-1302 - M2CP CRUDE'],
+        '2,6 DCBC CRUDE':['2,6 DCBC CRUDE BR-111'],
+        '2,6 DMBN (STAGE-II) WET POWDER':['2,6 DMBN ST-II RE-2509'],
+        '2,6 DCBN (STAGE-I) DRY POWDER':['2,6 DCBN DRY ST-I RE-2510']
     }
 
     # Apply filtering based on the stage name

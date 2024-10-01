@@ -18,3 +18,27 @@ def calculate_nndi_iso_propyl_ethyl_amine(stock_summary):
         stock_summary.loc[stock_summary['Item Name'] == 'DIPEA INTERCUT-2 (IIND CUT)', 'Additional_QTY_mult']
     ).values[0]
     return stock_summary
+
+
+def calculate_dpi(Con_qty,stock_summary):
+    # Ensure 'WIP-RM' column exists in Con_qty and is numeric
+    if 'WIP-RM' not in Con_qty.columns:
+        Con_qty['WIP-RM'] = 0.0
+    else:
+        Con_qty['WIP-RM'] = pd.to_numeric(Con_qty['WIP-RM'], errors='coerce').fillna(0.0)
+
+    # Ensure 'NET QTY' is numeric in stock_summary
+    stock_summary['NET QTY'] = pd.to_numeric(stock_summary['NET QTY'], errors='coerce').fillna(0.0)
+
+    # Get total 'NET QTY' for both items
+    items_to_sum = ['DIPA WIP (IST CUT)', 'DIPEA INTERCUT-2 (IIND CUT)']
+    total_net_qty = stock_summary.loc[
+        stock_summary['Item Name'].isin(items_to_sum), 'NET QTY'
+    ].sum()
+
+    # Add total_net_qty to 'WIP-RM' for 'DIISOPROPYLAMINE (M)' in Con_qty
+    Con_qty.loc[
+        Con_qty['Consume_Item_Name'] == 'DIISOPROPYLAMINE (M)', 'WIP-RM'
+    ] += total_net_qty
+
+    return Con_qty   

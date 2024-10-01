@@ -99,10 +99,9 @@ fg_name_to_items = {
         '2,4 DICHLRO BENZAL CHLORIDE CRUDE': {'source':  ['out_product', 'bi_product'], 'stage': 2},
     },
     '2,6 DICHLORO BENZOYL CHLORIDE':{
-        '2,6 DCBC CRUDE': {'source':  ['out_product', 'bi_product'], 'stage': 1},
+        '2,6 DCBC CRUDE': {'source':  ['out_product', 'bi_product'], 'stage': 1,'Bom': True},
         '2,6 DCBC INTERCUT-1': {'source':  ['out_product', 'bi_product'], 'stage': 2},
         '2,6 DCBC INTERCUT-2': {'source':  ['out_product', 'bi_product'], 'stage': 3},
-        '2,6 DCBN (STAGE-I) DRY POWDER': {'source':  ['out_product', 'bi_product'], 'stage': 4},
     },
     'DMA-CHLORIDE LAN':{
         'OCDB INTERCUT-01': {'source':  ['out_product', 'bi_product'], 'stage': 1},
@@ -115,8 +114,8 @@ fg_name_to_items = {
         '4-FTMP RECOVERED TOLUENE': {'source':  ['out_product', 'bi_product'], 'stage': 4},
     },
     '2,6 DIMETHOXY BENZOIC ACID':{
-        '2,6 DCBN (STAGE-I) DRY POWDER': {'source':  ['out_product', 'bi_product'], 'stage': 1},
-        '2,6 DMBN (STAGE-II) WET POWDER': {'source':  ['out_product', 'bi_product'], 'stage': 2},
+        '2,6 DCBN (STAGE-I) DRY POWDER': {'source':  ['out_product', 'bi_product'], 'stage': 1,'Bom': True},
+        '2,6 DMBN (STAGE-II) WET POWDER': {'source':  ['out_product', 'bi_product'], 'stage': 2,'Bom': True},
         '2,6 DMBA (STAGE-II) IIND CROP': {'source':  ['out_product', 'bi_product'], 'stage': 3},
         '2,6 DMBA (STAGE-III) IIND CROP': {'source':  ['out_product', 'bi_product'], 'stage': 4},
     },

@@ -7,6 +7,7 @@ def Calculate_24dcbc(Con_qty, job_work_df,stock_summary):
         'Consume_Quantity': 'sum',
         'Consume_Value': 'sum'
     }).reset_index()
+    # grouped_job_work_df.to_csv('grouped_job_work_df.csv')
     # Merge the grouped_job_work_df with Con_qty based on 'Consume_Item_Name'
     Con_qty = pd.merge(Con_qty, grouped_job_work_df, on='Consume_Item_Name', how='left')
     

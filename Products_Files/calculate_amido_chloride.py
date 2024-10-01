@@ -19,15 +19,7 @@ def calculate_quantities(row):
         return row
 
 def calculate_amido_chloride(stock_summary,job_work_df):
-    # Get the 'NET QTY' value of 'AMIDO RECOVERED ISO PROPYL ACETATE'
-    net_qty_amido_recovered_isopropyl_acetate = stock_summary.loc[
-        stock_summary['Item Name'] == 'AMIDO RECOVERED ISO PROPYL ACETATE', 'NET QTY'].values[0]
     
-    # Update the 'ADDITIONAL QTY CONSUMED IN OTHER WIP' column for 'AMIDO RECOVERED IPAC INTERCUT-1'
-    stock_summary.loc[
-        stock_summary['Item Name'] == 'AMIDO RECOVERED IPAC INTERCUT-1', 'ADDITIONAL QTY CONSUMED IN OTHER WIP'] = net_qty_amido_recovered_isopropyl_acetate
-    
-    stock_summary = stock_summary.apply(calculate_quantities, axis=1)
      
     net_qty_amido_recovered_isopropyl_acetate = stock_summary.loc[
         stock_summary['Item Name'] == 'AMIDO IPA ML', 'NET QTY'].values[0]
@@ -36,6 +28,17 @@ def calculate_amido_chloride(stock_summary,job_work_df):
     # Update the 'ADDITIONAL QTY CONSUMED IN OTHER WIP' column for 'AMIDO RECOVERED IPAC INTERCUT-1'
     stock_summary.loc[
         stock_summary['Item Name'] == 'AMIDO RECOVERED ISO PROPYL ACETATE', 'ADDITIONAL QTY CONSUMED IN OTHER WIP'] = net_qty_amido_recovered_isopropyl_acetate
+    
+    stock_summary = stock_summary.apply(calculate_quantities, axis=1)
+
+
+    # Get the 'NET QTY' value of 'AMIDO RECOVERED ISO PROPYL ACETATE'
+    net_qty_amido_recovered_isopropyl_acetate = stock_summary.loc[
+        stock_summary['Item Name'] == 'AMIDO RECOVERED ISO PROPYL ACETATE', 'NET QTY'].values[0]
+    
+    # Update the 'ADDITIONAL QTY CONSUMED IN OTHER WIP' column for 'AMIDO RECOVERED IPAC INTERCUT-1'
+    stock_summary.loc[
+        stock_summary['Item Name'] == 'AMIDO RECOVERED IPAC INTERCUT-1', 'ADDITIONAL QTY CONSUMED IN OTHER WIP'] = net_qty_amido_recovered_isopropyl_acetate
     
     stock_summary = stock_summary.apply(calculate_quantities, axis=1)
 
