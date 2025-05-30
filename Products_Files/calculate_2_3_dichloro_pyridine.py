@@ -50,3 +50,12 @@ def calculate_2_3_dichloro_pyridine(stock_summary):
     stage_3_net_qty = stock_summary.loc[stock_summary['Item Name'] == '2,3 DCP IIND CROP', 'NET QTY'].values[0]
     stage_4_net_qty = stock_summary.loc[stock_summary['Item Name'] == '2,3 DCP SFG', 'NET QTY'].values[0]
     return round(stage_3_net_qty,2), round(stage_4_net_qty,2)
+
+
+def calculate_23dcp(Con_qty,stock_summary):
+    # Extracting the NET QTY value for "2,3 DCP RECOVERED IPA" from stock_summary_df
+    net_qty_value = stock_summary.loc[stock_summary["Item Name"] == "2,3 DCP RECOVERED IPA", "NET QTY"].values[0]
+
+    # Updating the WIP-RM column in con_qty_df for "ISO PROPYL ALCOHOL (M)"
+    Con_qty.loc[Con_qty["Consume_Item_Name"] == "ISO PROPYL ALCOHOL (M)", "WIP-RM"] = float(net_qty_value)
+    return Con_qty

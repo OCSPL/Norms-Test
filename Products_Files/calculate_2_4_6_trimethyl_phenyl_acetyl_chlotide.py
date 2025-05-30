@@ -103,4 +103,18 @@ def Calculate_246(Con_qty,stock_summary):
     # Add the mesitylene_net_qty value to 'WIP-RM' in the filtered row
     if not mesitylene_con_qty_row.empty:
         Con_qty.loc[mesitylene_con_qty_row.index, 'WIP-RM'] += mesitylene_net_qty
+    
+           
+    Tol_row_1 = stock_summary[stock_summary['Item Name'] == '2,4,6 (STAGE-III) RECOVERED TOLUENE']
+    Tol_row_2 = stock_summary[stock_summary['Item Name'] == '2,4,6 (STAGE-II) RECOVERED TOLUENE']
+    Tol_row_3 = stock_summary[stock_summary['Item Name'] == '2,4,6 (STAGE-III) TOLUENE WIP']
+
+    tol_net_qty = (Tol_row_1['NET QTY'].values[0] if not Tol_row_1.empty else 0)+(Tol_row_2['NET QTY'].values[0] if not Tol_row_2.empty else 0)+(Tol_row_3['NET QTY'].values[0] if not Tol_row_3.empty else 0)
+   
+
+    Tol_con_qty_row = Con_qty[Con_qty['Consume_Item_Name'] == 'TOLUENE (M)']
+
+    if not Tol_con_qty_row.empty:
+            Con_qty.loc[Tol_con_qty_row.index, 'WIP-RM'] += tol_net_qty
+
     return Con_qty

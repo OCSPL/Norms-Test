@@ -1,0 +1,121 @@
+2025-05-20 10:18:41 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:06:28 - sahil login
+2025-05-20 12:06:45 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:07:54 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:15:15 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:15:52 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:17:44 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:37:07 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:43:56 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:48:25 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:50:26 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:53:31 - sahil searched | FG_Name: 2,5 DIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-20 12:54:04 - sahil searched | FG_Name: N,N DI ISO PROPYL ETHYL AMINE
+2025-05-20 12:54:35 - sahil searched | FG_Name: 2-METHOXY BENZOIC ACID
+2025-05-20 12:55:05 - sahil searched | FG_Name: 2,4 DICHLORO BENZOYL CHLORIDE
+2025-05-20 12:56:11 - sahil searched | FG_Name: DICHLORO ACETIC ACID
+2025-05-20 12:56:48 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-20 15:21:13 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-20 15:22:16 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-20 15:25:08 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-20 15:26:05 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-20 15:45:36 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-20 15:46:18 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-21 10:48:27 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-21 10:53:40 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-21 11:11:13 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-21 11:15:07 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-21 11:17:05 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-21 11:17:37 - sahil searched | FG_Name: 2,5 DIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-21 11:18:02 - sahil searched | FG_Name: N,N DI ISO PROPYL ETHYL AMINE
+2025-05-21 11:18:24 - sahil searched | FG_Name: 2-METHOXY BENZOIC ACID
+2025-05-21 11:18:50 - sahil searched | FG_Name: 2,4 DICHLORO BENZOYL CHLORIDE
+2025-05-21 11:26:15 - sahil searched | FG_Name: 2,4 DICHLORO BENZOYL CHLORIDE
+2025-05-21 11:26:35 - sahil searched | FG_Name: 2,4 DICHLORO BENZOYL CHLORIDE
+2025-05-21 11:48:51 - sahil searched | FG_Name: 2,4 DICHLORO BENZOYL CHLORIDE
+2025-05-21 11:49:12 - sahil searched | FG_Name: 2,4 DICHLORO BENZOYL CHLORIDE
+2025-05-21 11:58:52 - sahil searched | FG_Name: DMA-CHLORIDE LAN
+2025-05-21 11:59:29 - sahil searched | FG_Name: TPA
+2025-05-21 12:00:08 - sahil searched | FG_Name: M-DEA
+2025-05-21 12:01:40 - sahil searched | FG_Name: 2,6 DICHLORO BENZOYL CHLORIDE
+2025-05-21 12:08:11 - sahil searched | FG_Name: TPA
+2025-05-21 12:35:27 - sahil searched | FG_Name: M-MEA
+2025-05-21 12:38:05 - sahil searched | FG_Name: M-DEA
+2025-05-21 14:16:17 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-21 14:16:48 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-21 14:17:32 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-21 14:26:31 - sahil searched | FG_Name: C-5 HYDROXY ESTER
+2025-05-21 14:27:08 - sahil searched | FG_Name: C-5 HYDROXY ESTER
+2025-05-21 14:28:31 - sahil searched | FG_Name: C-5 HYDROXY ESTER
+2025-05-21 14:28:48 - sahil searched | FG_Name: C-5 HYDROXY ESTER
+2025-05-21 14:29:56 - sahil searched | FG_Name: C-5 HYDROXY ESTER
+2025-05-21 14:32:17 - sahil searched | FG_Name: C-5 HYDROXY ESTER
+2025-05-21 14:34:23 - sahil searched | FG_Name: C-5 HYDROXY ESTER
+2025-05-21 14:34:56 - sahil searched | FG_Name: AMIDO CHLORIDE
+2025-05-21 14:40:39 - sahil searched | FG_Name: 2,6 DIMETHOXY BENZOIC ACID
+2025-05-21 14:41:32 - sahil searched | FG_Name: 2,6 DIMETHOXY BENZOIC ACID
+2025-05-21 14:43:24 - sahil searched | FG_Name: 4-FLUORO-3-TRIFLUOROMETHYL PHENOL
+2025-05-21 14:43:53 - sahil searched | FG_Name: 4-HYDROXY-3-(2,4,6-TRIMETHYLPHENYL)-1-OXASPIRO[4.4]NON-3-EN-2-ONE
+2025-05-21 15:04:17 - sahil login
+2025-05-21 15:42:29 - sahil login
+2025-05-21 15:53:54 - sahil login
+2025-05-21 15:54:02 - sahil searched | FG_Name: AMIDO CHLORIDE
+2025-05-21 15:54:17 - sahil searched | FG_Name: AMIDO CHLORIDE
+2025-05-21 16:01:20 - sahil logout. Session Duration: 0:07:26.236875
+2025-05-22 14:17:08 - sahil login
+2025-05-22 14:17:50 - sahil searched | FG_Name: 4-FLUORO-3-TRIFLUOROMETHYL PHENOL
+2025-05-22 14:20:56 - sahil searched | FG_Name: TPA
+2025-05-22 14:22:06 - sahil searched | FG_Name: TPA
+2025-05-22 14:22:20 - sahil searched | FG_Name: TPA
+2025-05-22 14:32:12 - sahil searched | FG_Name: TPA
+2025-05-22 14:40:48 - sahil searched | FG_Name: TPA
+2025-05-22 14:44:18 - sahil searched | FG_Name: TPA
+2025-05-22 14:44:51 - sahil searched | FG_Name: TPA
+2025-05-22 14:45:58 - sahil searched | FG_Name: 2,5 DIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-22 14:46:26 - sahil searched | FG_Name: 2,5 DIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-22 14:46:56 - sahil searched | FG_Name: 2,4,6 TRIMETHYL PHENYL ACETYL CHLORIDE
+2025-05-22 14:51:06 - sahil searched | FG_Name: TPA
+2025-05-22 15:24:37 - sahil searched | FG_Name: TPA
+2025-05-22 15:26:30 - sahil searched | FG_Name: TPA
+2025-05-22 15:29:52 - sahil searched | FG_Name: TPA
+2025-05-22 15:31:21 - sahil searched | FG_Name: TPA
+2025-05-22 15:31:36 - sahil searched | FG_Name: TPA
+2025-05-22 15:31:51 - sahil searched | FG_Name: TPA
+2025-05-22 15:32:00 - sahil searched | FG_Name: TPA
+2025-05-22 15:35:36 - sahil searched | FG_Name: TPA
+2025-05-22 15:36:02 - sahil searched | FG_Name: TPA
+2025-05-22 15:36:11 - sahil searched | FG_Name: TPA
+2025-05-22 15:37:12 - sahil searched | FG_Name: TPA
+2025-05-22 15:56:42 - sahil searched | FG_Name: TPA
+2025-05-22 16:05:30 - sahil searched | FG_Name: TPA
+2025-05-22 16:05:42 - sahil searched | FG_Name: TPA
+2025-05-22 16:05:52 - sahil searched | FG_Name: TPA
+2025-05-22 16:09:06 - sahil searched | FG_Name: DICHLORO ACETIC ACID
+2025-05-22 16:09:12 - sahil searched | FG_Name: DICHLORO ACETIC ACID
+2025-05-22 16:09:19 - sahil searched | FG_Name: DICHLORO ACETIC ACID
+2025-05-22 16:19:56 - sahil login
+2025-05-22 16:20:08 - sahil searched | FG_Name: 4-HYDROXY-3-(2,4,6-TRIMETHYLPHENYL)-1-OXASPIRO[4.4]NON-3-EN-2-ONE
+2025-05-22 16:20:15 - sahil searched | FG_Name: 4-HYDROXY-3-(2,4,6-TRIMETHYLPHENYL)-1-OXASPIRO[4.4]NON-3-EN-2-ONE
+2025-05-22 16:26:30 - sahil searched | FG_Name: TPA
+2025-05-23 14:17:32 - sahil logout. Session Duration: 1 day, 22:35:03.447376
+2025-05-23 14:17:55 - superadmin login
+2025-05-23 14:18:21 - superadmin logout. Session Duration: 0:00:26.815336
+2025-05-23 14:18:26 - ganesh.t login
+2025-05-23 14:34:00 - ganesh.t searched | FG_Name: TPA
+2025-05-23 14:34:36 - ganesh.t logout. Session Duration: 0:16:10.610482
+2025-05-23 14:34:42 - sahil login
+2025-05-23 14:34:47 - sahil searched | FG_Name: TPA
+2025-05-23 14:35:36 - sahil searched | FG_Name: TPA
+2025-05-23 14:35:51 - sahil logout. Session Duration: 0:01:09.530116
+2025-05-23 14:36:03 - ganesh.t login
+2025-05-23 14:41:43 - ganesh.t searched | FG_Name: TPA
+2025-05-23 14:56:14 - ganesh.t logout. Session Duration: 0:20:11.308411
+2025-05-23 16:14:13 - ganesh.t login
+2025-05-23 16:14:28 - ganesh.t searched | FG_Name: DICHLORO ACETIC ACID
+2025-05-29 16:25:00 - sahil login
+2025-05-29 16:25:32 - sahil searched | FG_Name: 2,4 DICHLORO BENZALDEHYDE
+2025-05-29 16:27:30 - sahil searched | FG_Name: 2,4 DICHLORO BENZALDEHYDE
+2025-05-29 16:28:35 - sahil searched | FG_Name: 2,4 DICHLORO BENZALDEHYDE
+2025-05-29 17:51:24 - sahil searched | FG_Name: 2,6 DICHLORO BENZOYL CHLORIDE
+2025-05-30 10:14:00 - sahil searched | FG_Name: DICHLORO ACETIC ACID
+2025-05-30 12:52:45 - sahil searched | FG_Name: DMA-CHLORIDE LAN
