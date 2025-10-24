@@ -1,8 +1,9 @@
 fg_name_stage_mapping = {
                     '2,3 DI CHLORO PYRIDINE': {
                         'items': [
-                            {'stage': 'Stage III', 'quantity_var': 'stage_3_net_qty'},
-                            {'stage': 'Stage IV', 'quantity_var': 'stage_4_net_qty'},
+                            {'item_name': '2,3 DCP IIND CROP', 'stage': 'Stage III'},
+                            {'item_name': '2,3 DCP SFG', 'stage': 'Stage IV'},
+                            {'item_name': '2,3,5 TRICHLORO PYRIDINE', 'stage': 'Stage VI'},
                         ]
                     },
                     'N,N DI ISO PROPYL ETHYL AMINE': {
@@ -31,14 +32,20 @@ fg_name_stage_mapping = {
                     'DMA-CHLORIDE LAN': {
                         'items': [
                             {'item_name': 'OCDB INTERCUT-01', 'stage': 'Stage I'},
+                            {'item_name': 'OCDB INTERCUT-02', 'stage': 'Stage VI'},
                         ]
                     },
                     'DICHLORO ACETIC ACID': {
                         'items': [
-                            {'item_name': 'DCAT INTERCUT-1', 'stage': 'Stage IV'},
+                            {'item_name': 'DCAT INTERCUT-1', 'stage': 'Stage II'},
+                            {'item_name': 'DICA INTERCUT-1', 'stage': 'Stage VI'},
+                            {'item_name': 'DICA INTERCUT-2', 'stage': 'Stage VII'},
+                            {'item_name': 'DICA SFG OFF SPEC', 'stage': 'Stage VIII'},
+                            {'item_name': 'DICA SFG', 'stage': 'Stage IX'},
+                            {'item_name': 'DCAT SFG OFF SPEC', 'stage': 'Stage X'},
                         ]
                     },
-                    '2,4 DICHLORO BENZOYL CHLORIDE': {
+                    '2,4 DICHLORO BENZYL CHLORIDE': {
                         'items': [
                             {'item_name': '2,4 DCBC INTERCUT-1', 'stage': 'Stage III'},
                             {'item_name': '2,4 DCBC INTERCUT-2', 'stage': 'Stage VI'},
@@ -73,5 +80,50 @@ fg_name_stage_mapping = {
                             {'item_name': '2,6 DMBA (STAGE-II) IIND CROP', 'stage': 'Stage III'},
                             {'item_name': '2,6 DMBA (STAGE-III) IIND CROP', 'stage': 'Stage IV'},
                         ]
-                    }
+                    },'METCAMIFEN TECH.': {
+                        'items': [
+                            {'item_name': 'METCAMIFEN STAGE IV SAM-IV SFG SPEC', 'stage': 'Stage VII'},
+                            {'item_name': 'METCAMIFEN STAGE-II OA-CI INTERCUT-1', 'stage': 'Stage XI'},
+                            {'item_name': 'METCAMIFEN STAGE-III INTERCUT', 'stage': 'Stage XII'},
+                        ]
+                    },
+                    '1,2 DIMETHYL PROPYL AMINE': {
+                        'items': [
+                            {'item_name': 'DMPM INTERCUT-01', 'stage': 'Stage III'},
+                        ]
+                    },
+                    'TPA':{
+                        'items':[
+                            {'item_name':'TFAC STAGE-II CRUDE','stage':'Stage V'},
+                        ]
+                    },
+                    '2,6 DICHLORO BENZOYL CHLORIDE':{
+                        'items':[
+                            {'item_name':'2,6 DCBC INTERCUT-1','stage':'Stage I'},
+                            {'item_name':'2,6 DCBC INTERCUT-2','stage':'Stage II'},
+                            {'item_name':'2,6 DCBC (STAGE-I) INTERCUT-1','stage':'Stage III'},
+                        ]
+                    },
+                     'M-MEA':{
+                        'items':[
+                            {'item_name':'MMEA SFG OFF SPEC','stage':'Stage III'},
+                        ]
+                    },
+                    'M-DEA':{
+                        'items':[
+                            {'item_name':'MDEA SFG OFF SPEC','stage':'Stage III'},
+                        ]
+                    },
+                    '4-FLUORO-3-TRIFLUOROMETHYL PHENOL': {
+                        'items': [
+                            {'item_name': '4-FTMP INTERCUT-1', 'stage': 'Stage II'},
+                            {'item_name': '4-FTMP INTERCUT-2', 'stage': 'Stage III'},
+                        ]
+                    },
+                    '4-TERTIARY BUTYL BENZYL CYANIDE': {
+                        'items': [
+                            {'item_name': 'TBBC STAGE-I', 'stage': 'Stage I'},
+                            {'item_name': 'TBBC STAGE-II CRUDE', 'stage': 'Stage VI'},
+                        ]
+                    },
                 }

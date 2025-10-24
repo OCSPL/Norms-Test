@@ -7,16 +7,17 @@ def fetch_bom_details(stage_name, stock_summary, engine_eres, fg_name):
     with engine_eres.connect() as connection:
         bom_df = pd.read_sql_query(bom_query, connection)
         bom_df = bom_df[bom_df['BOMQty'] != 0]
+        bom_df.to_csv('bom_df.csv')
         bom_wip = bom_df.copy()
         
     bom_names = {
         'DIPEA CRUDE': ['DIPEA CRUDE-MAX'],
-        '2,4,6 TMBCL (STAGE-I) ORGANIC LAYER': ['2,4,6 TMBCL ST-I ORG.LAYER BR-102'],
-        '2,4,6 TMBCL STAGE-I': ['2,4,6 TMBCL ST-I AR-106'],
-        '2,4,6 TMBCN STAGE-II':['2,4,6 TMBCN ST-II AR-102'],
+        '2,4,6 TMBCL (STAGE-I) ORGANIC LAYER': ['2,4,6 TMBCL ST-I ORG.LAYER RE-2511'],
+        '2,4,6 TMBCL STAGE-I': ['2,4,6 TMBCL ST-I RE-1508'],
+        '2,4,6 TMBCN STAGE-II':['2,4,6 TMBCN ST-II RE-2509'],
         '2,4,6 TMBCN (STAGE-II) WET CAKE':['2,4,6 TMBCN ST-II WET CAKE AR-101'],
         '2,4,6 TMPACL (STAGE-III) DRY POWDER':['2,4,6 TMPACL ST-III AR-105'],
-        '2,4,6 TMPACL (STAGE-IV) CRUDE':['2,4,6 TMPACL ST-IV AR-102'],
+        '2,4,6 TMPACL (STAGE-IV) CRUDE':['2,4,6 TMPACL ST-IV AR-109'],
         '2,4,6 TMPACL (STAGE-III) DRY POWDER':['2,4,6 TMPACL ST-III AR-105'],
         '2,5 DMBCL (STAGE-I) CRUDE':['2,5 DMBCL ST-I CRUDE RE-2511'],
         '2,5 DMBCL STAGE-I':['2,5 DMBCL ST-I RE-1508'],
@@ -25,19 +26,37 @@ def fetch_bom_details(stage_name, stock_summary, engine_eres, fg_name):
         '2,5 DMPAA (STAGE-III) DRY POWDER':['2,5 DMPAA ST-III RE-3507'],
         '2,5 DMPAC (STAGE-IV) CRUDE':['2,5 DMPAC ST-IV BR-109'],
         'METCAMIFEN SAM-I WET CAKE':['26000235 - ST-I - WET CAKE BR-107'],
-        'METCAMIFEN SAM-II DRY POWDER':['26000236 - ST-II - DRY POWDER'],
+        'METCAMIFEN SAM-II DRY POWDER':['26000236 - ST-II - B BLOCK - DRY POWDER'],
+        'METCAMIFEN STAGE-I SAM UREA DRY POWDER':['26000261- BR-107 - UREA DRY POWDER'],
+        'METCAMIFEN STAGE-II OA-CI CRUDE':['26000262 - RE-1411 - OACL CRUDE'],
+        'METCAMIFEN STAGE-II- OA-Cl MAINCUT':['26000263 - RE-1511 - OA-CL MAINCUT'],
         'C-5 HYDROXY ESTER CRUDE':['26000097-C-5 EASTER CRUDE BR-111'],
         'SPIR STAGE-I':['SPIR (ST-I) DRE-1301'],
         'SPIR (STAGE-II) WET CAKE':['26000210-SPIR (ST-II) WET CAKE DRE-1302'],
-        'OCDB ORGANIC LAYER':['OCDB ORGANIC LAYER (RE-2503)'],
+        'OCDB ORGANIC LAYER':['26000267 - RE-3504 - ORGANIC LAYER'],
         '2,4,6 TMPACL (STAGE-III) WET POWDER':['2,4,6 TMPACL ST-III WP AR-108'],
-        '2,4 DCBC CRUDE':['2,4 DCBC CRUDE-MAX'],
-        '2-MBA WET CAKE':['2-MBA WET CAKE BR-102'],
+        '2,4 DCBC CRUDE':['DRE-1301 - STAGE- I CHLORINATION'],
+        '2-MBA WET CAKE':['2-MBA WET CAKE BR-111'],
         '2-CHLORO PROPIONIC ACID-M2CP STAGE-I':['26000123 - DRE-1302 - M2CP STAGE-I'],
         'M2CP CRUDE':['26000119 - DRE-1302 - M2CP CRUDE'],
         '2,6 DCBC CRUDE':['2,6 DCBC CRUDE BR-111'],
-        '2,6 DMBN (STAGE-II) WET POWDER':['2,6 DMBN ST-II RE-2509'],
-        '2,6 DCBN (STAGE-I) DRY POWDER':['2,6 DCBN DRY ST-I RE-2510']
+        '2,6 DMBN (STAGE-II) WET POWDER':['2,6 DMBN ST-II RE-2508'],
+        '2,6 DCBN (STAGE-I) DRY POWDER':['2,6 DCBN DRY ST-I RE-2510'],
+        '2,6 DMBA (STAGE-III) WET POWDER':['2,6 DMBA ST-III AR-108'],
+        'DCAT STAGE II CRUDE':['26000274- AR-109 - DCAT ST-II CRUDE'],
+        'DICA SFG':['28000043 - AR-110 - DICA SFG'],
+        'PICK-I-A (STAGE-I)':['26000142 - PICK-I-A - STAGE-I'],
+        'PICK-I-B (STAGE-II)':['26000143 - PICK-I-B - STAGE-II'],
+        'CP-AMINE':['26000276-JW-CP AMINE'],
+        'DMPM CRUDE':['26000280 - PRE-2302 - DMPM CRUDE'],
+        'TFAC STAGE-I CRUDE':['26000277 - CR-102 - TFAC STAGE-I CRUDE'],
+        'TFAC STAGE-II CRUDE':['26000279 - CR-201 - TFAC STAGE-II CRUDE'],
+        '4-FTMP CRUDE':['4-FTMP CRUDE-MAX'],
+        '2,4 DICHLORO BENZALDEHYDE WET CAKE':['2,4 DCB WET CAKE BR-110'],
+        'MDEA RECOVERED N-BUTANOL':['26000282 - PRE-2303 - RECOVERED N-BUTANOL'],
+        'MMEA RECOVERED N-BUTANOL':['26000281 -N-BUTANOL'],
+        '2,4 DCBC ORGANIC LAYER':['26000289 - DRE-1101 - ORGANIC LAYER'],
+        'TBBC STAGE-I CRUDE':['TBBC ST-I CRUDE CR-104']
     }
 
     # Apply filtering based on the stage name
@@ -58,6 +77,48 @@ def fetch_bom_details(stage_name, stock_summary, engine_eres, fg_name):
                 (bom_df['BOMName'] == bom_name) & 
                 (bom_df['Type'].isin(['Key Raw Material', 'Raw Material','Semi Finished Good']))
             ]
+        elif stage_name == 'DICA SFG':
+            # For 'DICA SFG', filter bom_df to include only 'Semi Finished Good' type
+            bom_df = bom_df[
+                (bom_df['ItemName'] == stage_name) & 
+                (bom_df['BOMName'] == bom_name) & 
+                (bom_df['Type'].isin(['Work in Progress']))
+            ]
+        elif stage_name == '2,4 DCBC ORGANIC LAYER':
+            # For 'DICA SFG', filter bom_df to include only 'Semi Finished Good' type
+            bom_df = bom_df[
+                (bom_df['ItemName'] == stage_name) & 
+                (bom_df['BOMName'] == bom_name) & 
+                (bom_df['Type'].isin(['Key Raw Material','Work in Progress','Raw Material']))
+            ]
+        elif stage_name == 'METCAMIFEN STAGE-II- OA-Cl MAINCUT':
+            # For 'SPIR STAGE-I', filter bom_df to include only 'Semi Finished Good' type
+            bom_df = bom_df[
+                (bom_df['ItemName'] == stage_name) & 
+                (bom_df['BOMName'] == bom_name) & 
+                (bom_df['Type'].isin(['Work in Progress', 'Intercut']))
+            ] 
+        elif stage_name == 'MDEA RECOVERED N-BUTANOL':
+            # For 'SPIR STAGE-I', filter bom_df to include only 'Semi Finished Good' type
+            bom_df = bom_df[
+                (bom_df['ItemName'] == stage_name) & 
+                (bom_df['BOMName'] == bom_name) & 
+                (bom_df['Type'].isin(['WIP FR']))
+            ] 
+        elif stage_name == 'MMEA RECOVERED N-BUTANOL':
+            # For 'SPIR STAGE-I', filter bom_df to include only 'Semi Finished Good' type
+            bom_df = bom_df[
+                (bom_df['ItemName'] == stage_name) & 
+                (bom_df['BOMName'] == bom_name) & 
+                (bom_df['Type'].isin(['WIP FR']))
+            ] 
+        elif stage_name == 'METCAMIFEN STAGE-II OA-CI CRUDE':
+            # For 'SPIR STAGE-I', filter bom_df to include only 'Semi Finished Good' type
+            bom_df = bom_df[
+                (bom_df['ItemName'] == stage_name) & 
+                (bom_df['BOMName'] == bom_name) & 
+                (bom_df['Type'].isin(['Finished Good','Raw Material']))
+            ]     
         else:           
             # Filter bom_df to include only 'Key Raw Material' and 'Raw Material' types
             bom_df = bom_df[

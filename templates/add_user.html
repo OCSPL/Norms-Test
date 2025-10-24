@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('your-background-image-url.jpg'); /* Update with actual URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center horizontally */
+            height: 100vh;
+            margin: 0;
+        }
+        .norms-heading {
+            background-color: #003366; /* Dark blue background for norms */
+            color: white; /* White text color */
+            padding: 15px 0; /* Padding around the heading */
+            text-align: center; /* Center align the text */
+            font-size: 2em; /* Increased font size */
+            width: 100%; /* Full width */
+            margin-bottom: 20px; /* Space below the heading */
+            position: relative; /* Positioning */
+        }
+        .button-row {
+            display: flex; /* Use Flexbox for alignment */
+            justify-content: space-between; /* Space between buttons */
+            position: absolute; /* Position it inside the heading */
+            top: 15px; /* Align with heading */
+            left: 0; /* Align to the left */
+            right: 0; /* Align to the right */
+            padding: 0 15px; /* Padding for the buttons */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: left; /* Left align the text */
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #343a40; /* Dark grey color for the text */
+            text-align: center; /* Center align the h2 */
+        }
+        .btn-custom {
+            width: 100%; /* Full width for buttons */
+            margin-top: 10px; /* Space above buttons */
+        }
+        .btn-back {
+            background-color: #6c757d; /* Gray */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="norms-heading">
+        NORMS
+        <div class="button-row">
+            <a href="{{ url_for('admin_panel') }}" class="btn btn-back">Back</a>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h2>Add User</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select class="form-control" id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-custom">Add User</button>
+        </form>
+    </div>
+</body>
+</html>

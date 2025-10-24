@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NORMS</title>
+    <!-- Include Tailwind CSS via CDN (for development/demonstration) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Optional: You can customize Tailwind theme defaults here if needed
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Example: Define a custom primary color
+                        // primary: '#003366',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Optional: Add custom base styles or component styles if needed */
+        /* For instance, a custom font */
+        /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
+        /* body { font-family: 'Inter', sans-serif; } */
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen relative">
+
+    <!-- Header -->
+    <div class="absolute top-0 left-0 w-full bg-indigo-700 py-4 text-white text-center text-3xl font-bold shadow-md">
+        NORMS
+    </div>
+
+    <!-- Login Card Container -->
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md mt-24">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Login</h2>
+
+        <!-- Flask integration: Keep the form action and method -->
+        <form method="POST" action="{{ url_for('login') }}">
+            <!-- Username Field -->
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                <input
+                    type="text"
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent sm:text-sm"
+                    id="username"
+                    name="username"
+                    required
+                >
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <input
+                    type="password"
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent sm:text-sm"
+                    id="password"
+                    name="password"
+                    required
+                >
+            </div>
+
+            <!-- Submit Button -->
+            <button
+                type="submit"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 ease-in-out"
+            >
+                Login
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>
